@@ -56,7 +56,14 @@ class Cuenta(object):
         self.saldo_descubierto_disponible = saldo_descubierto_disponible
 
 
-
+class Direccion(object):
+    def __init__(self, calle,numero,ciudad,provincia,pais):
+        self.calle = calle
+        self.numero = numero
+        self.ciudad = ciudad
+        self.provincia = provincia
+        self.pais = pais
+    
 def readJSON(json_file):
     with open(json_file, 'r') as json_object:
         return json.load(json_object)
@@ -70,10 +77,26 @@ if obj['tipo']== 'BLACK':
         obj['DNI'],
     )
 elif obj['tipo'] == 'GOLD':
-    ...
+    cliente = Gold(
+        obj['nombre'],
+        obj['apellido'],
+        obj['numero'],
+        obj['DNI'],
+    )
 elif obj['tipo'] == 'CLASSIC':
-    ...
+    cliente = Classic(
+        obj['nombre'],
+        obj['apellido'],
+        obj['numero'],
+        obj['DNI'],
+    )
 else:
     raise Exception(f"No existe el tipo de cliente {obj['tipo']}") 
 
 print(cliente.dni)
+
+#Como se relacionan las clases
+#Cual es la relación entre transacción y cuenta
+#¿Cuál es el objetivo principal de sprint?
+#Que sería razón
+#Hay q definir dirección?
