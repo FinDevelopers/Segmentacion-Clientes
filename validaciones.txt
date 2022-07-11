@@ -1,0 +1,23 @@
+CLASSIC
+- Retiro_efectivo: hasta $10.000, sin descubierto
+- Alta_tarjeta: no
+- Alta_chequera: no
+- Compra_Dolar: no
+- Transferencia_Enviada: 1% de comisión, sin descubierto
+- Transferencia_Recibida: hasta $150.000
+
+GOLD
+- Retiro_efectivo: hasta $20.000, descubierto $10.000
+- Alta_tarjeta: si no tiene ninguna
+- Alta_chequera: si no tiene ninguna
+- Compra_Dolar: si
+- Transferencia_Enviada: 0.5% de comisión, descubierto $10.000
+- Transferencia_Recibida: hasta $500.000
+
+BLACK
+- Retiro_efectivo: hasta $100.000, descubierto $10.000
+- Alta_tarjeta: si no tiene 5
+- Alta_chequera: si no tiene 2
+- Compra_Dolar: si
+- Transferencia_Enviada: sin comisión, descubierto $10.000
+- Transferencia_Recibida: cualquiera
