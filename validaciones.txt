@@ -21,3 +21,59 @@ BLACK
 - Compra_Dolar: si
 - Transferencia_Enviada: sin comisión, descubierto $10.000
 - Transferencia_Recibida: cualquiera
+
+CLASSIC 
+RETIRO EFECTIVO
+- si cupoDiarioRestante < monto  =>  Fue rechazada pq el cupoDiarioRestante es menor que el monto a retirar
+- si saldoEnCuenta < monto  => Fue rechazada pq el saldo es insuficiente
+
+ALTA TARJETA / ALTA CHEQUERA / COMPRA DOLAR
+- Fue rechazada pq classic no puede realizar estas acciones
+
+TRANSFERENCIA ENVIADA:
+- si  saldoEnCuenta < monto + comision * monto  => Fue rechazada pq el saldo es insuficiente
+
+TRANSFERENCIA RECIBIDA:
+-si tope < monto => Fue rechazada pq no se avisó la transferencia 
+
+
+GOLD 
+RETIRO EFECTIVO
+- si cupoDiarioRestante < monto  =>  Fue rechazada pq el cupoDiarioRestante es menor que el monto a retirar
+- si saldoEnCuenta + 10000 < monto  => Fue rechazada pq el saldo es insuficiente
+
+ALTA TARJETA:
+- si totalTarjetasDeCreditoActualmente >= 1 => Fue rechazada porque ya tiene el máximo de tarjetas de crédito (1)
+
+ALTA CHEQUERA:
+- si totalChequerasActualmente >= 1 => Fue rechazada porque ya tiene el máximo de chequeras (1)
+
+COMPRA DOLAR:
+- si saldoEnCuenta < monto  => Fue rechazada pq el saldo es insuficiente
+
+TRANSFERENCIA ENVIADA:
+- si  saldoEnCuenta < monto + comision * monto  => Fue rechazada pq el saldo es insuficiente
+
+TRANSFERENCIA RECIBIDA:
+-si tope < monto => Fue rechazada pq no se avisó la transferencia 
+
+
+BLACK 
+RETIRO EFECTIVO
+- si cupoDiarioRestante < monto  =>  Fue rechazada pq el cupoDiarioRestante es menor que el monto a retirar
+- si saldoEnCuenta + 10000 < monto  => Fue rechazada pq el saldo es insuficiente
+
+ALTA TARJETA:
+- si totalTarjetasDeCreditoActualmente >= 5 => Fue rechazada porque ya tiene el máximo de tarjetas de crédito (5)
+
+ALTA CHEQUERA:
+- si totalChequerasActualmente >= 2 => Fue rechazada porque ya tiene el máximo de chequeras (2)
+
+COMPRA DOLAR:
+- si saldoEnCuenta < monto  => Fue rechazada pq el saldo es insuficiente
+
+TRANSFERENCIA ENVIADA:
+- si  saldoEnCuenta < monto => Fue rechazada pq el saldo es insuficiente
+
+TRANSFERENCIA RECIBIDA:
+- No tiene restricciones, puede recibir cualquier monto
