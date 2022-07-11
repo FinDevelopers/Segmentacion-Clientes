@@ -31,10 +31,10 @@ ALTA TARJETA / ALTA CHEQUERA / COMPRA DOLAR
 - Fue rechazada pq classic no puede realizar estas acciones
 
 TRANSFERENCIA ENVIADA:
-- si  saldoEnCuenta < monto + comision * monto  => Fue rechazada pq el saldo es insuficiente
+- si  saldoEnCuenta < monto + 0.01 * monto  => Fue rechazada pq el saldo es insuficiente
 
 TRANSFERENCIA RECIBIDA:
--si tope < monto => Fue rechazada pq no se avisó la transferencia 
+-si 150000 < monto => Fue rechazada pq no se avisó la transferencia 
 
 
 GOLD 
@@ -52,10 +52,10 @@ COMPRA DOLAR:
 - si saldoEnCuenta < monto  => Fue rechazada pq el saldo es insuficiente
 
 TRANSFERENCIA ENVIADA:
-- si  saldoEnCuenta < monto + comision * monto  => Fue rechazada pq el saldo es insuficiente
+- si  saldoEnCuenta < monto + 0.005 * monto  => Fue rechazada pq el saldo es insuficiente
 
 TRANSFERENCIA RECIBIDA:
--si tope < monto => Fue rechazada pq no se avisó la transferencia 
+-si 500000 < monto => Fue rechazada pq no se avisó la transferencia 
 
 
 BLACK 
