@@ -9,5 +9,7 @@ class Transaccion(object):
         self.saldo_en_cuenta = saldo_en_cuenta
         self.total_tarjetas_credito = total_tarjetas_credito
         self.total_chequeras = total_chequeras
+    
+    razon = ''
 
     
