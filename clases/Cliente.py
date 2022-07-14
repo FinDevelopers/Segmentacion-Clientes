@@ -1,7 +1,7 @@
-from Transaccion import *
-
 class Cliente(object):
     transacciones = []
+    direccion = None
+
     def __init__(self, nombre, apellido, numero, dni):
         self.nombre = nombre
         self.apellido = apellido
@@ -138,7 +138,8 @@ class Black(Cliente):
         
 
 # pruebas
-"""a = Black('juan','perez',234234,44213443)
+"""from Transaccion import *
+a = Black('juan','perez',234234,44213443)
 c = Transaccion('ACEPTADA', 'RETIRO_EFECTIVO_CAJERO_AUTOMATICO', 19, 100000, 10000, '10/10/2022 16:00:55', -1, 4 , 1)
 a.transacciones.append(c)
 b = a.transacciones
