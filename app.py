@@ -1,6 +1,9 @@
+from array import array
 import json
 import sys
 import codecs
+
+from pyrsistent import m
 from clases import Cliente ,Transaccion, Direccion
   
 #Crea in diccionario de python a partir de un archivo JSON
@@ -27,15 +30,14 @@ def crear_cliente(obj):
             obj['numero'],
             obj['dni'],
         )
-    elif obj['tipo'] == 'CLASSIC':
+    else:
         cliente = Cliente.Classic(
             obj['nombre'],
             obj['apellido'],
             obj['numero'],
             obj['dni'],
         )
-    else:
-        raise Exception(f"No existe el tipo de cliente {obj['tipo']}") 
+    
 
     cliente.direccion = Direccion.Direccion(
         obj['direccion']['calle'],
@@ -151,6 +153,86 @@ def crear_html(cliente):
         
         html_file.write(html_content)
 
+def validar_json(obj):
+    #print(obj.values())
+    validar_llaves(obj, ['numero', 'nombre', 'apellido', 'dni', 'tipo', 'direccion', 'transacciones'])
+    
+    validar_numero(obj['numero'])
+    validar_string(obj['nombre'])
+    validar_string(obj['apellido'])
+    validar_string(obj['dni'])
+    validar_tipo(obj['tipo'], ['BLACK','GOLD', 'CLASSIC'], "tipo")
+    validar_diccionario(obj['direccion'])
+
+    validar_llaves(obj['direccion'], ['calle', 'numero', 'ciudad', 'provincia', 'pais'])
+    
+    validar_string(obj['direccion']['calle'])
+    validar_string(obj['direccion']['numero'])
+    validar_string(obj['direccion']['ciudad'])
+    validar_string(obj['direccion']['provincia'])
+    validar_string(obj['direccion']['pais'])
+    validar_lista(obj['transacciones'])
+
+    for transaccion in obj['transacciones']:
+        validar_diccionario(transaccion)
+        validar_llaves(transaccion, ['estado', 'tipo', 'cuentaNumero', 'cupoDiarioRestante', 'monto', 'fecha', 'numero', 'saldoEnCuenta', 'totalTarjetasDeCreditoActualmente', 'totalChequerasActualmente'])
+        validar_tipo(transaccion['estado'], ['ACEPTADA','RECHAZADA'], "estado")
+        validar_tipo(transaccion['tipo'],['RETIRO_EFECTIVO_CAJERO_AUTOMATICO', 'ALTA_TARJETA_CREDITO', 'ALTA_CHEQUERA', 'COMPRA_DOLAR', 'TRANSFERENCIA_ENVIADA' ,'TRANSFERENCIA_RECIBIDA'], "tipo")
+        validar_numero(transaccion['cuentaNumero'])
+        validar_numero(transaccion['cupoDiarioRestante'])
+        validar_numero(transaccion['monto'])
+        validar_string(transaccion['fecha'])
+        validar_numero(transaccion['numero'])
+        validar_numero(transaccion['saldoEnCuenta'])
+        validar_numero(transaccion['totalTarjetasDeCreditoActualmente'])
+        validar_numero(transaccion['totalChequerasActualmente'])
+        
+        
+def validar_llaves(diccionario, arreglo_llaves):
+    keys_array = []
+    
+    for key in diccionario.keys():
+        if key not in arreglo_llaves:
+            print(f"Error, hay una llave no reconocida")
+            exit()
+        keys_array.append(key)
+
+    if len(set(keys_array)) != len(arreglo_llaves):
+        print("Error, la cantidad de datos no es la esperada")
+        exit()
+
+
+    
+def validar_numero(numero):
+    try: 
+        if numero <= -1:
+            print('Error en el formato: Numero menor a 0')
+            exit()
+    except TypeError:
+            print("Numero tiene que ser una variable numerica")
+            exit()
+
+def validar_string(string):
+    string = str(string)
+    if len(string.strip()) == 0:
+        print("La cadena está vacía")
+        exit()
+    
+
+def validar_tipo(tipo, arreglo, nombre_tipo):
+    if tipo not in arreglo:
+        print(f'{tipo} no es un {nombre_tipo} válido')
+        exit()
+
+def validar_diccionario(diccionario):
+    if not type(diccionario) == dict:
+        print("El tipo de dato no es un diccionario")
+        exit()
+
+def validar_lista(lista):
+    if not type(lista) == list:
+        print("El tipo de dato no es una lista")
+        exit()
 #Funcion principal donde se ejecuta el script.
 def main():
 
@@ -161,8 +243,15 @@ def main():
         exit()
 
     obj = readJSON(json_file)
+    validar_json(obj)
+    #crear una funcion para obj validarJson
     cliente = crear_cliente(obj)
     cliente.transacciones = crear_lista_transacciones(obj)
     cliente = asignar_razon(cliente)
     crear_html(cliente)    
 main()
+
+
+#Validar que el json venga bien
+#"numero": 100001,
+
