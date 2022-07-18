@@ -172,7 +172,7 @@ def crear_html(cliente):
             table_rows += f'<td>{atributo}</td>'
         table_rows += '</tr>'
 
-    with codecs.open('prueba.html', 'w', "utf-8") as html_file:
+    with codecs.open('reporte.html', 'w', "utf-8") as html_file:
 
         html_content = f"""
     <!DOCTYPE html>
