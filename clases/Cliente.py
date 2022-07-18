@@ -70,7 +70,6 @@ class Gold(Cliente):
             return True
         else:
             return 'Cliente Gold no puede tener más de una tarjeta de crédito'
-               
         
     def validar_chequera(self, transaccion):
         if transaccion.total_chequeras == 0:
@@ -114,7 +113,6 @@ class Black(Cliente):
         else:
             return 'Cliente Black no puede tener más de 5 tarjetas de crédito'
                
-        
     def validar_chequera(self, transaccion):
         if transaccion.total_chequeras <= 1:
             return True
@@ -135,12 +133,3 @@ class Black(Cliente):
 
     def transferencia_recibida(self, transaccion):
         return True
-        
-
-# pruebas
-"""from Transaccion import *
-a = Black('juan','perez',234234,44213443)
-c = Transaccion('ACEPTADA', 'RETIRO_EFECTIVO_CAJERO_AUTOMATICO', 19, 100000, 10000, '10/10/2022 16:00:55', -1, 4 , 1)
-a.transacciones.append(c)
-b = a.transacciones
-print(a.transferencia_recibida(b[0]))"""
